@@ -1,6 +1,7 @@
 package com.dnyaneshwar.bank.controller;
 
 import com.dnyaneshwar.bank.dto.RegisterRequest;
+import com.dnyaneshwar.bank.dto.LoginRequest;
 import com.dnyaneshwar.bank.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,5 +22,12 @@ public class AuthController {
             @RequestBody RegisterRequest request) {
 
         return userService.register(request);
+    }
+
+    @PostMapping("/login")
+    public String login(
+            @RequestBody LoginRequest request) {
+
+        return userService.login(request);
     }
 }

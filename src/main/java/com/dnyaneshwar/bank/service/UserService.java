@@ -1,6 +1,7 @@
 package com.dnyaneshwar.bank.service;
 
 import com.dnyaneshwar.bank.dto.RegisterRequest;
+import com.dnyaneshwar.bank.dto.LoginRequest;
 import com.dnyaneshwar.bank.entity.User;
 import com.dnyaneshwar.bank.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -39,5 +40,22 @@ public class UserService {
         userRepository.save(user);
 
         return "Registration successful";
+    }
+
+    public String login(LoginRequest request) {
+
+        User user = userRepository
+                .findByEmail(request.getEmail())
+                .orElse(null);
+
+        if (user == null) {
+            return "User not found";
+        }
+
+        if (!user.getPassword().equals(request.getPassword())) {
+            return "Invalid password";
+        }
+
+        return "Login successful";
     }
 }
