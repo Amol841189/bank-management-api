@@ -1,6 +1,7 @@
 package com.dnyaneshwar.bank.entity;
 
 import jakarta.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "accounts")
@@ -14,7 +15,11 @@ public class Account {
     private String accountNumber;
 
     @Column(nullable = false)
-    private double balance;
+    private BigDecimal balance = BigDecimal.ZERO;
+    
+    @OneToOne
+    @JoinColumn(name = "user_id", nullable = false, unique = true)
+    private User user;
 
     public Account() {
     }
@@ -31,11 +36,20 @@ public class Account {
         this.accountNumber = accountNumber;
     }
 
-    public double getBalance() {
+    public BigDecimal getBalance() {
         return balance;
     }
 
-    public void setBalance(double balance) {
+    public void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
 }

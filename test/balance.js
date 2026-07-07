@@ -18,7 +18,7 @@
 
 async function checkBalance() {
 
-    const accountNumber = "ACC1001";
+    const accountNumber = "1000000003";
 
     try {
 

@@ -17,26 +17,47 @@
  * - Failure: "Email already exists" or validation error message
  */
 
-async function registerUser() {
-    const response = await fetch(
-        "http://localhost:9090/api/auth/register",
-        {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                fullName: "Amol Patil",
-                email: "amol@gmail.com",
-                password: "123456"
-            })
-        }
-    );
+// async function registerUser() {
+//     const response = await fetch(
+//         "http://localhost:9090/api/auth/register",
+//         {
+//             method: "POST",
+//             headers: {
+//                 "Content-Type": "application/json"
+//             },
+//             body: JSON.stringify({
+//                 fullName: "Amol Patil",
+//                 email: "amol@gmail.com",
+//                 password: "123456"
+//             })
+//         }
+//     );
 
-    const data = await response.text();
+//     const data = await response.text();
 
-    console.log("Status:", response.status);
-    console.log("Response:", data);
-}
+//     console.log("Status:", response.status);
+//     console.log("Response:", data);
+// }
 
-registerUser();
+// registerUser();
+
+const user = {
+    fullName: "Kalyani Chaudhari",
+    email: "kalyani123@gmail.com",
+    password: "123456"
+};
+
+fetch("http://localhost:9090/api/auth/register", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify(user)
+})
+.then(response => response.text())
+.then(data => {
+    console.log(data);
+})
+.catch(error => {
+    console.error("Error:", error);
+});
