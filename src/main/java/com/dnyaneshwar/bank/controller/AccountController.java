@@ -1,5 +1,7 @@
 package com.dnyaneshwar.bank.controller;
 
+import com.dnyaneshwar.bank.dto.DepositRequest;
+import com.dnyaneshwar.bank.dto.DepositResponse;
 import com.dnyaneshwar.bank.service.AccountService;
 import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
@@ -19,5 +21,12 @@ public class AccountController {
             @PathVariable String accountNumber) {
 
         return accountService.getBalance(accountNumber);
+    }
+
+    @PostMapping("/deposit")
+    public DepositResponse deposit(
+            @RequestBody DepositRequest request) {
+        
+        return accountService.deposit(request);
     }
 }
