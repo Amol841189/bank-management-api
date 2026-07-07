@@ -1,12 +1,14 @@
 package com.dnyaneshwar.bank.service;
 
 import com.dnyaneshwar.bank.dto.LoginRequest;
+import com.dnyaneshwar.bank.dto.LoginResponse;
 import com.dnyaneshwar.bank.dto.RegisterRequest;
 import com.dnyaneshwar.bank.entity.Account;
 import com.dnyaneshwar.bank.entity.User;
 import com.dnyaneshwar.bank.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.http.ResponseEntity;
 
 import java.math.BigDecimal;
 
@@ -51,19 +53,20 @@ public class UserService {
         return "Registration successful";
     }
 
-    public String login(LoginRequest request) {
+    public LoginResponse login(LoginRequest request) {
 
         User user = userRepository.findByEmail(request.getEmail())
                 .orElse(null);
 
         if (user == null) {
-            return "User not found";
+            return new LoginResponse(null, "User not found");
         }
 
         if (!user.getPassword().equals(request.getPassword())) {
-            return "Invalid password";
+            return new LoginResponse(null, "Invalid password");
         }
 
-        return "Login successful";
+        return new LoginResponse("HDFCBANK-LOGIN-TOKEN-DNYANESHWAR00002345", "Login successful");
+
     }
 }
