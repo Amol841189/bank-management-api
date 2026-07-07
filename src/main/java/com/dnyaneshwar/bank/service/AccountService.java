@@ -3,6 +3,8 @@ package com.dnyaneshwar.bank.service;
 import com.dnyaneshwar.bank.entity.Account;
 import com.dnyaneshwar.bank.repository.AccountRepository;
 import org.springframework.stereotype.Service;
+import java.math.BigDecimal;
+
 
 @Service
 public class AccountService {
@@ -13,7 +15,7 @@ public class AccountService {
         this.accountRepository = accountRepository;
     }
 
-    public double getBalance(String accountNumber) {
+    public BigDecimal getBalance(String accountNumber) {
 
         Account account = accountRepository
                 .findByAccountNumber(accountNumber)

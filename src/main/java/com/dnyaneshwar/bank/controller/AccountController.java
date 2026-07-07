@@ -2,6 +2,7 @@ package com.dnyaneshwar.bank.controller;
 
 import com.dnyaneshwar.bank.service.AccountService;
 import org.springframework.web.bind.annotation.*;
+import java.math.BigDecimal;
 
 @RestController
 @RequestMapping("/api/accounts")
@@ -14,7 +15,7 @@ public class AccountController {
     }
 
     @GetMapping("/{accountNumber}/balance")
-    public double getBalance(
+    public BigDecimal getBalance(
             @PathVariable String accountNumber) {
 
         return accountService.getBalance(accountNumber);

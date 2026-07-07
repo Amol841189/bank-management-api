@@ -19,6 +19,9 @@ public class User {
 
     private String role;
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Account account;
+    
     public User() {
     }
 
@@ -63,5 +66,16 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public Account getAccount() { 
+        return account;
+    }
+    
+    public void setAccount(Account account) {
+        this.account = account;
+        if (account != null) {
+            account.setUser(this);
+        }
     }
 }

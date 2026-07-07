@@ -11,4 +11,6 @@ public interface AccountRepository
     Optional<Account> findByAccountNumber(
             String accountNumber
     );
+    
+    boolean existsByAccountNumber(String accountNumber);
 }
