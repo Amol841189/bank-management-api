@@ -8,7 +8,7 @@
 async function depositMoney() {
 
     const depositRequest = {
-        accountNumber: "1000000002",
+        accountNumber: "1000000012",
         amount: 5000.45
     };
 
@@ -30,6 +30,7 @@ async function depositMoney() {
         }
 
         const data = await response.json();
+        console.table(data);
 
         console.log("========== Deposit Successful ==========");
         console.log("Message           :", data.message);
