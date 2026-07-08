@@ -42,8 +42,8 @@
 // registerUser();
 
 const user = {
-    fullName: "Kalyani Chaudhari",
-    email: "kalyani123@gmail.com",
+    fullName: "Rajat Chaudhari",
+    email: "Rajat1212@gmail.com",
     password: "123456"
 };
 
@@ -54,8 +54,10 @@ fetch("http://localhost:9090/api/auth/register", {
     },
     body: JSON.stringify(user)
 })
-.then(response => response.text())
+// .then(response => response.text())
+.then(response => response.json())
 .then(data => {
+    // console.table(data);
     console.log(data);
 })
 .catch(error => {
