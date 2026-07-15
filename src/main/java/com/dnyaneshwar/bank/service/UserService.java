@@ -29,34 +29,6 @@ public class UserService {
         this.accountNumberGenerator = accountNumberGenerator;
     }
 
-    // @Transactional
-    // public String register(RegisterRequest request) {
-
-    //     if (userRepository.findByEmail(request.getEmail()).isPresent()) {
-    //         return "Email already exists";
-    //     }
-
-    //     // Create User
-    //     User user = new User();
-    //     user.setFullName(request.getFullName());
-    //     user.setEmail(request.getEmail());
-    //     user.setPassword(request.getPassword()); // Later replace with BCrypt
-    //     user.setRole("CUSTOMER");
-
-    //     // Create Account
-    //     Account account = new Account();
-    //     account.setAccountNumber(accountNumberGenerator.generate());
-    //     account.setBalance(BigDecimal.ZERO);
-
-    //     // Link User and Account
-    //     user.setAccount(account);
-
-    //     // Save User (Account is saved automatically because of CascadeType.ALL)
-    //     userRepository.save(user);
-
-    //     return "Registration successful";
-    // }
-
     @Transactional
     public RegisterResponse register(RegisterRequest request) {
 
@@ -107,7 +79,6 @@ public class UserService {
                 true,
                 accountResponse
         );
-
 
     }
 

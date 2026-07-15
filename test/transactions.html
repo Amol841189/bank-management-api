@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Transaction History</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f5f7fb;
+}
+
+.container{
+    width:95%;
+    max-width:1100px;
+    margin:40px auto;
+}
+
+.card{
+    background:white;
+    border-radius:12px;
+    padding:30px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+h1{
+    text-align:center;
+    margin-bottom:25px;
+    color:#1e293b;
+}
+
+.search{
+    display:flex;
+    gap:10px;
+    margin-bottom:25px;
+}
+
+.search input{
+    flex:1;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:15px;
+}
+
+.search button{
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:12px 22px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:15px;
+}
+
+.search button:hover{
+    background:#1d4ed8;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+thead{
+    background:#2563eb;
+    color:white;
+}
+
+th,td{
+    padding:14px;
+    text-align:center;
+}
+
+tbody tr{
+    border-bottom:1px solid #eee;
+}
+
+tbody tr:hover{
+    background:#f9fafb;
+}
+
+.deposit{
+    color:green;
+    font-weight:600;
+}
+
+.withdraw{
+    color:#dc2626;
+    font-weight:600;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<div class="card">
+
+<h1>Transaction History</h1>
+
+<div class="search">
+<input type="text" id="accountNumber" placeholder="Enter Account Number">
+<button onclick="loadTransactions()">View Transactions</button>
+</div>
+
+<table>
+
+<thead>
+
+<tr>
+    <th>ID</th>
+    <th>Date</th>
+    <th>Type</th>
+    <th>Amount</th>
+    <th>Balance</th>
+    <th>Description</th>
+</tr>
+
+</thead>
+
+<tbody id="tbody">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<script>
+
+async function loadTransactions(){
+
+const accountNumber=document.getElementById("accountNumber").value;
+
+const response=await fetch(`http://localhost:9090/api/accounts/${accountNumber}/transactions`);
+
+const data=await response.json();
+
+const tbody=document.getElementById("tbody");
+
+tbody.innerHTML="";
+
+data.forEach(t=>{
+
+let color=t.type==="DEPOSIT" ? "deposit" : "withdraw";
+
+tbody.innerHTML+=`
+<tr>
+
+<td>${t.transactionId}</td>
+
+<td>${t.transactionDate}</td>
+
+<td class="${color}">
+${t.type}
+</td>
+
+<td>₹${t.amount}</td>
+
+<td>₹${t.balanceAfterTransaction}</td>
+
+<td>${t.description}</td>
+
+
+</tr>
+`;
+
+});
+
+}
+
+</script>
+
+</body>
+</html>

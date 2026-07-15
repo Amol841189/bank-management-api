@@ -9,7 +9,7 @@ async function depositMoney() {
 
     const depositRequest = {
         accountNumber: "1000000012",
-        amount: 5000.45
+        amount: 6956
     };
 
     try {
@@ -49,4 +49,7 @@ async function depositMoney() {
 }
 
 // Execute the function
-depositMoney();
+
+for (let i = 0; i < 50; i++) {
+    depositMoney();
+}
