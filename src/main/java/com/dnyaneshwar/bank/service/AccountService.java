@@ -95,7 +95,7 @@ public class AccountService {
         transaction.setStatus(TransactionStatus.SUCCESS);
 
         // Record the date and time of the transaction.
-        transaction.setCreatedAt(LocalDateTime.now());
+        transaction.setCreatedAt(transactionTime);
 
         // Step 6: Save the transaction in the database.
         transactionRepository.save(transaction);
@@ -106,7 +106,7 @@ public class AccountService {
                 account.getAccountNumber(),
                 request.getAmount(),
                 account.getBalance(),
-                LocalDateTime.now()
+                transactionTime
         );
     }
 
@@ -158,7 +158,7 @@ public class AccountService {
         transaction.setType(TransactionType.WITHDRAW);
         transaction.setStatus(TransactionStatus.SUCCESS);
         transaction.setDescription("Cash Withdrawal");
-        transaction.setCreatedAt(LocalDateTime.now());
+        transaction.setCreatedAt(transactionTime);
 
         transactionRepository.save(transaction);
 
@@ -171,7 +171,7 @@ public class AccountService {
                 account.getAccountNumber(),
                 request.getAmount(),
                 account.getBalance(),
-                LocalDateTime.now()
+                transactionTime
         );
     }
 
